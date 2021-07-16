@@ -2,34 +2,28 @@
 
 namespace App;
 
+use Exception;
+
 class RepeatedString {
 
     public function repeat(string $s,int $n) : int
     {
-        $newArr = str_split($s);
-
-        $finalArr = [];
-        $count = 0;
-        $index = 0;
-
-        while ($count < $n) {
-            if($index == count($newArr)) {
-                $index = 0;
-            }
-
-            if($index < $n) {
-                array_push($finalArr, $newArr[$index]);
-            } 
-            
-            $index++;
-            $count++;
-        }   
-            
-        $pattern = '/a/';
-        $result = join($finalArr);
-        $numOfa = preg_match_all($pattern, $result);
-
-        return $numOfa;
+        Define('CHAR', 'a');
+    
+        if (!gettype($n) === 'integer' || !gettype($s) === 'string' || !$s || $n <= 0) {
+            return 0;
+        }
+        if (!strcasecmp($s, CHAR)) {
+            return $n;
+        }
+        
+        $len = strlen($s);
+        
+        $occurrences = substr_count($s, CHAR);
+        $occurrences *= floor($n / $len);
+        $occurrences += substr_count(substr($s, 0, $n % $len), CHAR);
+        
+        return $occurrences;
     }
 
 }
