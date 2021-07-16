@@ -18,7 +18,7 @@ RepeatedString has the following parameter(s):
 
 ## Returns
 
-· int: the frequency of a in the substring
+· int: the frequency of 'a' in the substring
 
 ## Input Format
 
